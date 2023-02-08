@@ -6,7 +6,7 @@ export async function signIn(email, password) {
 }
 
 export async function logOut(token) {
-    const response = await api.post('/auth/sign-in', {
+    const response = await api.post('/auth/log-out', {
         headers: {
           Authorization: `Bearer ${token}`,
         }
