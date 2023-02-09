@@ -4,6 +4,9 @@ import UserContext from './contexts/UserContext';
 
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import AppPage from './pages/App'
+import User from './pages/App/User';
+import Diary from './pages/App/Diary';
 
 import useLocalStorage from './hooks/useLocalStorage';
 
@@ -18,19 +21,19 @@ export default function App() {
           <Route path="/sign-up" element={<SignUp/>} />
           <Route path="/sign-in" element={<SignIn/>} />
 
-          {/* <Route
-            path="/navbar"
+          <Route
+            path="/app"
             element={
               <ProtectedRouteGuard>
-                < />
+                <AppPage/>
               </ProtectedRouteGuard>
              }
             >
-              <Route path="diary" element={} />
-              <Route path="workouts" element={} />
-              <Route path="user" element={} />
-              <Route index path="*" element={<Navigate to="/navbar/workouts" />} />
-          </Route> */}
+              <Route path="user" element={<User/>} />
+              <Route path="diary" element={<Diary/>} />
+              {/* <Route path="workouts" element={} /> */}
+              <Route index path="*" element={<Navigate to="/app/user" />} />
+          </Route>
         </Routes>
       </Router>
     </UserContext.Provider>

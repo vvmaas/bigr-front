@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Input from '../../components/Form/Input';
@@ -7,11 +7,15 @@ import Link from '../../components/Link';
 
 import useSignIn from '../../hooks/api/useSignIn';
 
+import UserContext from '../../contexts/UserContext';
+
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const { loadingSignIn, signIn } = useSignIn();
+
+  const { setUserData } = useContext(UserContext)
 
   const navigate = useNavigate();
 
@@ -19,8 +23,9 @@ export default function SignIn() {
     event.preventDefault();
 
     try {
-      await signIn(email, password);
-      navigate('/navbar');
+      const userData = await signIn(email, password);
+      setUserData(userData);
+      navigate('/app');
     } catch (err) {
       alert("It was not possible to sign-in")
     }
