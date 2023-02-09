@@ -1,24 +1,22 @@
 import useAsync from '../useAsync';
 import useToken from '../useToken';
-import useUser from './useUser';
 
 import * as userApi from '../../services/userApi';
 
-export default function useUpdateUser(body) {
+export default function useUpdateUser() {
   const token = useToken();
-  const user = useUser();
   
   const {
-    data: updateUser,
+    data: updateUserData,
     loading: updateUserLoading,
     error: updateUserError,
-    act: getUpdateUser
-  } = useAsync(() => userApi.updateUser(token, user.id, body));
+    act: updateUserAct
+  } = useAsync((data) => userApi.updateUser(data, token), false);
 
   return {
-    updateUser,
+    updateUserData,
     updateUserLoading,
     updateUserError,
-    getUpdateUser
+    updateUserAct
   };
 }

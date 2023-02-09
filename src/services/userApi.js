@@ -14,8 +14,8 @@ export async function getUser(token) {
   return response.data;
 }
 
-export async function updateUser(token, id, body) {
-  const response = await api.put(`/users/${id}`, body, {
+export async function updateUser(body, token) {
+  const response = await api.put(`/users`, body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

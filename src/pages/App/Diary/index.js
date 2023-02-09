@@ -2,6 +2,21 @@ import { useState, useEffect } from "react";
 
 import useDiary from "../../../hooks/api/useDiary";
 
+export default function Diary() {
+    const { diary } = useDiary();
+
+    return (
+        <>
+        { diary ? (
+            <RenderDiary diary={diary}/>
+        ) : (
+            'Loading...'
+            )
+        }
+        </>
+    )
+}
+
 function RenderDiary(props) {
     const { diary } = props;
 
@@ -18,21 +33,6 @@ function RenderDiary(props) {
             </div>
             ) : (
                 'There are no diary logs yet'
-            )
-        }
-        </>
-    )
-}
-
-export default function Diary() {
-    const { diary } = useDiary();
-
-    return (
-        <>
-        { diary ? (
-            <RenderDiary diary={diary}/>
-        ) : (
-            'Loading...'
             )
         }
         </>
