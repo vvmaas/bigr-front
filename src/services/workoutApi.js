@@ -19,7 +19,7 @@ export async function getWorkoutInfo(id, token) {
     return response.data;
   }
 
-export async function postWorkouts(body, token) {
+export async function postWorkout(body, token) {
   const response = await api.post('/workout', body, {
     headers: {
       Authorization: `Bearer ${token}`,

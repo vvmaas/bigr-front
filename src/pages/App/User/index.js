@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import useUser from "../../../hooks/api/useUser";
 import useUpdateUser from "../../../hooks/api/useUpdateUser";
-import Button from "../../../components/Form/Button";
+import Button from "../../../components/Button";
 import Input from "../../../components/Form/Input";
 
 export default function User() {

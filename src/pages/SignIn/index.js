@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Input from '../../components/Form/Input';
-import Button from '../../components/Form/Button';
+import Button from '../../components/Button';
 import Link from '../../components/Link';
 
 import useSignIn from '../../hooks/api/useSignIn';
