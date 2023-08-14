@@ -6,7 +6,6 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import AppPage from './pages/App'
 import User from './pages/App/User';
-import Diary from './pages/App/Diary';
 import Workouts from './pages/App/Workouts';
 
 import useLocalStorage from './hooks/useLocalStorage';
@@ -31,7 +30,6 @@ export default function App() {
              }
             >
               <Route path="user" element={<User/>} />
-              <Route path="diary" element={<Diary/>} />
               <Route path="workouts" element={<Workouts/>} />
               <Route index path="*" element={<Navigate to="/app/user" />} />
           </Route>
