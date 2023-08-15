@@ -12,7 +12,7 @@ export default function User() {
     const [edit, setEdit] = useState(false)
     const { user, userLoading } = useUser();
     const [userData, setUserData] = useState(false); 
-    const { weights, weightLoading } = useWeight();
+    const { weights } = useWeight();
     const [weightData, setWeightData] = useState(false);
     useEffect(() => {
         if(user) {
@@ -25,12 +25,11 @@ export default function User() {
           setWeightData(weights)
       }
     }, [user, weights])
-
     return (
       <Wrapper>
         <InfoWrapper>
           <ContentWrapper>
-          {edit ? <UserUpdateInfo user={userData ? userData : user} setUserData={setUserData} userLoading={userLoading} setEdit={setEdit}/> : <UserInfo user={userData ? userData : user}/>}
+          {edit ? <UserUpdateInfo user={userData ? userData : user} setUserData={setUserData} userLoading={userLoading} setEdit={setEdit}/> : <UserInfo weightData={weightData} user={userData ? userData : user}/>}
           </ContentWrapper>
             {edit ? <></> : <SetEdit onClick={() => setEdit(true)}>...</SetEdit>}
         </InfoWrapper>
@@ -90,4 +89,8 @@ const WeightWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  button {
+    margin-top: 1rem;
+  }
 `

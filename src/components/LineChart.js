@@ -13,8 +13,8 @@ function LineChart({ chartData }) {
             },
           },
           borderWidth: 2,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.5,
+          borderColor: "rgb(75, 192, 192)",
+          tension: 0.3,
           showLine: true
         }}
       />

@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 import { useState, useEffect } from "react";
 
+import Button from "../../../components/Button";
+import AddWeight from "./AddWeight";
 import Chart from "chart.js/auto";
 import {
     Chart as ChartJS,
@@ -21,9 +23,10 @@ Chart.register(
     );
 
 export default function Weight(props) {
-    const { weightData } = props;
+    const { weightData, setWeightData } = props;
     const [chartData, setChartData] = useState({})
     const [hasData, setHasData] = useState(false)
+    const [editWeight, setEditWeight] = useState(false)
 
     useEffect(() => {
         if(weightData){
@@ -31,7 +34,7 @@ export default function Weight(props) {
                 labels: weightData.slice(-4).map((data) => data.createdAt.toString().split('').splice(2, 8).join('')), 
                 datasets: [
                   {
-                    label: 'peso',
+                    label:  'weight',
                     data: weightData.slice(-4).map((data) => data.value),
                     borderColor: 'black'
                   },
@@ -41,7 +44,6 @@ export default function Weight(props) {
         }
     }, [weightData])
 
-    console.log(chartData);
     return (
         <>
             <MainWeight>
@@ -50,6 +52,14 @@ export default function Weight(props) {
             <div>
                 {hasData ? <LineChart chartData={chartData} /> : '-'}
             </div>
+
+            {editWeight ? 
+                <AddWeight weight={weightData[weightData.length-1].value} weightData={weightData} setWeightData={setWeightData} setEditWeight={setEditWeight}/>
+                : 
+                <Button onClick={() => setEditWeight(true)}>
+                    add weight
+                </Button>
+            }
         </>
     )
 }

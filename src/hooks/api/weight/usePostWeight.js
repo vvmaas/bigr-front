@@ -7,16 +7,16 @@ export default function usePostWeights() {
   const token = useToken();
   
   const {
-    data: postWeights,
+    data: postWeightsData,
     loading: postWeightsLoading,
     error: postWeightsError,
-    act: usePostWeights
-  } = useAsync(() => weightApi.postWeight(token));
+    act: postWeights
+  } = useAsync((data) => weightApi.postWeight(data, token), false);
 
   return {
     postWeights,
     postWeightsLoading,
     postWeightsError,
-    usePostWeights
+    postWeightsData
   };
 }

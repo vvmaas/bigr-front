@@ -1,6 +1,5 @@
 export default function UserInfo(props) {
-    const {user} = props;
-
+    const {user, weightData} = props;
     return (
         <>
             <div>
@@ -8,6 +7,9 @@ export default function UserInfo(props) {
             </div>
             <div>
                 height : {user?.height} cm
+            </div>
+            <div>
+                BMI : {(weightData[weightData.length-1]?.value / Math.pow((user?.height/100), 2)).toFixed(1)}
             </div>
         </>
     )
