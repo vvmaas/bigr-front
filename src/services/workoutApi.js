@@ -29,7 +29,7 @@ export async function postWorkout(body, token) {
   return response.data;
 }
 
-export async function deleteWorkouts(id, token) {
+export async function deleteWorkout(id, token) {
   const response = await api.delete(`/workout/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,

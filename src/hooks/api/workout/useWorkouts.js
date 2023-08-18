@@ -1,7 +1,7 @@
-import useAsync from '../useAsync';
-import useToken from '../useToken';
+import useAsync from '../../useAsync';
+import useToken from '../../useToken';
 
-import * as workoutApi from '../../services/workoutApi';
+import * as workoutApi from '../../../services/workoutApi';
 
 export default function useWorkouts() {
   const token = useToken();

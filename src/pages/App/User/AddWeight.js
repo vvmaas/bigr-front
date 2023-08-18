@@ -53,7 +53,7 @@ export default function AddWeight(props) {
     )
 }
 
-const Buttons = styled.div`
+export const Buttons = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -69,7 +69,7 @@ const Inputs = styled.div`
     }
 `
 
-const CancelButton = styled(Button)`
+export const CancelButton = styled(Button)`
     background-color: #1b1d1f40;
     margin-bottom: 0px;
 `

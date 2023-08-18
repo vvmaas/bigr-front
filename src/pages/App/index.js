@@ -1,9 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
+import NavBar from '../../components/NavBar';
+
 export default function AppPage() {
   return (
     <Container>
+      <NavBar />
       <Wrapper>
         <Outlet />
       </Wrapper>
@@ -18,9 +21,10 @@ const Container = styled.div`
   width: 50vw;
   border-radius: 8px;
   display: flex;
-  flex-direction: center;
   align-items: center;
   flex-direction: column;
+  padding-top: 20%;
+  overflow: scroll;
 
   @media (max-width: 600px) {
     height: calc(100vh - 80px);
@@ -30,9 +34,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   height: fit-content;
-  margin: auto;
   display: flex;
-  flex-direction: center;
   align-items: center;
   flex-direction: column;
 

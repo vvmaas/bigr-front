@@ -42,6 +42,7 @@ export default function User() {
 
 const Wrapper = styled.div`
   width: 120%;
+  margin-top: -1rem;
 `
 
 const InfoWrapper = styled.div`
