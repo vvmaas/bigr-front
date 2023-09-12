@@ -9,3 +9,13 @@ export async function postWorkoutExercise(body, token) {
   
     return response.data;
   }
+
+  export async function getWorkoutExerciseFromWorkout(id, token) {
+    const response = await api.get(`/workoutexercise/from/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  
+    return response.data;
+  }

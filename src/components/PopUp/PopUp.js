@@ -11,10 +11,9 @@ export default function PopUp({children, ...props}) {
 }
 
 const Wrapper = styled.div`
-    z-index: 2;
+    z-index: 10;
     height: fit-content;
-    width: 100%;
-    max-width: 650px;
+    width: 85%;
     background-color: white;
     border: 1px solid #CCCCCC;
     border-radius: 16px;
@@ -30,10 +29,10 @@ const Container = styled.div`
     display: ${(props) => (props.active ? "flex" : "none")};
     align-items: center;
     justify-content: center;
-    top: 0%;
+    bottom: 0%;
     right: 0%;
     position: fixed;
-    height: 80vh;
+    height: 100%;
     width: 100%;
     background-color: #63636351;
 `

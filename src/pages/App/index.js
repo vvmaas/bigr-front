@@ -1,12 +1,14 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import NavBar from '../../components/NavBar';
 
 export default function AppPage() {
+  const { id } = useParams();
+
   return (
     <Container>
-      <NavBar />
+      {id ? '' : <NavBar />}
       <Wrapper>
         <Outlet />
       </Wrapper>
@@ -23,17 +25,19 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 20%;
+  padding-top: 15vh;
   overflow: scroll;
 
   @media (max-width: 600px) {
     height: calc(100vh - 80px);
-    padding: 20px;
+    width: 90vw;
+    padding-top: 12vh;
   }
 `;
 
 const Wrapper = styled.div`
   height: fit-content;
+  width: 50%;
   display: flex;
   align-items: center;
   flex-direction: column;

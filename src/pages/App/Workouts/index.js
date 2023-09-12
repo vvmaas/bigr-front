@@ -28,5 +28,5 @@ export default function Workouts() {
 
 const Wrapper = styled.div`
   height: fit-content;
-  margin-top: -3rem;
+  margin-top: -2.2rem;
 `

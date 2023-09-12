@@ -10,12 +10,12 @@ export default function NavigationButton({ value, children }) {
   }
 
 const Button = styled.button`
-    width: 8rem;
+    width: 45%;
     height: 5rem;
     cursor: pointer;
-    background-color: #FFD80080;
+    background-color: #FFD80070;
     border-radius: 0 0 20px 20px;
-    border: 1px solid #1b1d1f80;
+    border: 1px solid #1b1d1f70;
 
     :hover {
       background-color: #FFD80099;

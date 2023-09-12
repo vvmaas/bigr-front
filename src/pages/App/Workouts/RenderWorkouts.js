@@ -24,8 +24,9 @@ export default function RenderWorkouts(props) {
           const body = {
             name,
           } 
-          setWorkoutsData([body, ...workouts])
-          await postWorkoutAct(body);
+          const newWorkout = await postWorkoutAct(body);
+          newWorkout.name = body.name
+          setWorkoutsData([newWorkout, ...workouts])
           setName('')
           setCreate(false);
         } catch (err) {

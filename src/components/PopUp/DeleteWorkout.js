@@ -1,10 +1,11 @@
 import styled from "styled-components"
+import { useEffect } from "react";
 
 import useDeleteWorkout from "../../hooks/api/workout/useDeleteWorkout"
 
 import Button from "../Button"
 
-export default function DeleteWorkout({id, name, setDisplay, setDeleting}) {
+export default function DeleteWorkout({id, name, setDisplay, deleting, setDeleting}) {
     const { deleteWorkoutAct } = useDeleteWorkout();
 
     async function deleteWorkout() {
@@ -13,6 +14,7 @@ export default function DeleteWorkout({id, name, setDisplay, setDeleting}) {
         setDisplay('none');
         setDeleting(false);
     }
+
 
     return (
         <Container>
@@ -32,12 +34,11 @@ export default function DeleteWorkout({id, name, setDisplay, setDeleting}) {
 const Container = styled.div`
     border-radius: inherit;
     padding: 25px;
-    width: 100%;
-    max-width: 700px;
+    width: 80%;
     background-color: white;
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
     h1 {
         width: 100%;
     }
