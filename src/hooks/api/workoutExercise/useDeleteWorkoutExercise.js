@@ -7,16 +7,16 @@ export default function useWorkoutExercises() {
   const token = useToken();
   
   const {
-    data: workoutExercises,
+    data: workoutExercise,
     loading: workoutExerciseLoading,
     error: workoutExerciseError,
-    act: getWorkoutExercise
-  } = useAsync((id) => workoutExerciseApi.getWorkoutExerciseFromWorkout(id, token), false);
+    act: deleteWorkoutExercise
+  } = useAsync((id) => workoutExerciseApi.deleteWorkoutExercise(id, token), false);
 
   return {
-    workoutExercises,
+    workoutExercise,
     workoutExerciseLoading,
     workoutExerciseError,
-    getWorkoutExercise
+    deleteWorkoutExercise
   };
 }

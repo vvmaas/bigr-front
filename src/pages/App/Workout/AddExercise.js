@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import useWorkout from "../../../hooks/api/workout/useWorkout";
+import usePostWorkoutExercise from "../../../hooks/api/workoutExercise/usePostWorkoutExercise";
 import useExercisesByKeyword from "../../../hooks/api/exercise/useExerciseKeyword";
+import useWorkoutExercises from "../../../hooks/api/workoutExercise/useWorkoutExercises";
 
 import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
@@ -17,16 +19,26 @@ export default function AddExercise(){
     const { exercise, getExercise } = useExercisesByKeyword();
     const { getWorkout, workout } = useWorkout();
     const [workoutData, setWorkoutData] = useState({});
+    const { postWorkoutExerciseAct } = usePostWorkoutExercise();
+    const { getWorkoutExercise, workoutExercises } = useWorkoutExercises();
+    const [workoutExerciseData, setWorkoutExerciseData] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(id){
+        if(id !== undefined){
             if(workout) {
                 setWorkoutData(workout)
             } else {
                 getWorkout(id);
             }
+
+            if(workoutExercises) {
+                setWorkoutExerciseData(workoutExercises)
+            } else {
+                getWorkoutExercise(id);
+            }
         }
+        
         if(exercise && fetchedInput === input) {
             setExercises(exercise)
         } else {
@@ -63,12 +75,27 @@ export default function AddExercise(){
                 value = 1
             }
         })
+        workoutExerciseData.forEach(item => {
+            if(item.exerciseId === id){
+                value = 1
+            }
+        })
         return value;
+    }
+
+    async function addSelected() {
+        const body = {
+            workoutId: id,
+            exercises: selected
+        }
+        await postWorkoutExerciseAct(body);
+
+        navigate(`/app/workouts/${id}`);
     }
 
     return (
         <Container>
-            <ReturnButton hoverColor="#1b1d1f50" onClick={() => navigate(`/app/workouts/${id}`)}> voltar </ReturnButton>
+            <ReturnButton hoverColor="#1b1d1f50" onClick={() => navigate(`/app/workouts/${id}`)}> return </ReturnButton>
             <Title>Adding exercises to workout {workoutData.name}</Title>
             {
             selected.length > 0 ? 
@@ -81,6 +108,7 @@ export default function AddExercise(){
                             )
                         })}
                     </ExerciseList>
+                    <Button onClick={() => addSelected()}>add</Button>
                 </SelectedExercises>
                 :
                 ''

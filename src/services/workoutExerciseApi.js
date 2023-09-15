@@ -16,6 +16,14 @@ export async function postWorkoutExercise(body, token) {
         Authorization: `Bearer ${token}`,
       },
     });
-  
+    return response.data;
+  }
+
+  export async function deleteWorkoutExercise(id, token) {
+    const response = await api.delete(`/workoutexercise/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   }

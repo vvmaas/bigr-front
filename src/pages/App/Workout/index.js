@@ -6,6 +6,8 @@ import useWorkout from "../../../hooks/api/workout/useWorkout";
 import useWorkoutExercises from "../../../hooks/api/workoutExercise/useWorkoutExercises";
 
 import Button from "../../../components/Button"
+import PopUp from "../../../components/PopUp/PopUp"
+import RemoveExercise from "../../../components/PopUp/RemoveExercise"
 
 export default function Workout(){
     const { id } = useParams();
@@ -13,14 +15,17 @@ export default function Workout(){
     const [workoutData, setWorkoutData] = useState({});
     const { getWorkoutExercise, workoutExercises } = useWorkoutExercises();
     const [workoutExerciseData, setWorkoutExerciseData] = useState([]);
+    const [deleting, setDeleting] = useState(false);
+    const [hasUpdate, setHasUpdate] = useState(false);
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         if(id !== undefined){
-            if(workoutExercises) {
+            if(workoutExercises && !hasUpdate) {
                 setWorkoutExerciseData(workoutExercises)
             } else {
                 getWorkoutExercise(id);
+                setHasUpdate(false)
             }
     
             if(workout) {
@@ -29,11 +34,11 @@ export default function Workout(){
                 getWorkout(id);
             }
         }
-    }, [workout, getWorkout, workoutExercises, getWorkoutExercise, id])
+    }, [workout, getWorkout, workoutExercises, getWorkoutExercise, hasUpdate, id])
 
     return (
         <Container>
-            <ReturnButton hoverColor="#1b1d1f50" onClick={() => navigate(`/app/workouts`)}> voltar </ReturnButton>
+            <ReturnButton hoverColor="#1b1d1f50" onClick={() => navigate(`/app/workouts`)}> return </ReturnButton>
             <Title>
                 <p>workout</p>
                 <h1>{workoutData.name}</h1>
@@ -45,7 +50,12 @@ export default function Workout(){
                     <WorkoutExerciseList>
                         {workoutExercises?.map(workoutExercise => {
                             return (
-                                    <WorkoutExerciseListing key={workoutExercise.id}><p>{workoutExercise.name}</p></WorkoutExerciseListing>
+                                <div key={workoutExercise.id}>
+                                    <WorkoutExerciseListing><p>{workoutExercise.Exercise.name}</p> <button onClick={() => setDeleting(true)}>x</button></WorkoutExerciseListing>
+                                    <PopUp active={deleting}>
+                                        <RemoveExercise id={workoutExercise.id} exerciseName={workoutExercise.Exercise.name} workoutName={workoutData.name} setHasUpdate={setHasUpdate} deleting={deleting} setDeleting={setDeleting} />
+                                    </PopUp>
+                                </div>
                             )    
                         })}
                     </WorkoutExerciseList>
@@ -84,11 +94,18 @@ const ReturnButton = styled(Button)`
 `
 
 const WorkoutExerciseList = styled.div`
-
+    margin-top: 20px;
 `
 
 const WorkoutExerciseListing = styled.div`
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
+    button {
+        cursor: pointer;
+    }
 `
 
 const Exercises = styled.div`
