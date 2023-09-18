@@ -8,9 +8,9 @@ import Input from "../../../components/Form/Input"
 import Button from "../../../components/Button";
 
 export default function LogForm ({id}) {
-    const [sets, setSets] = useState('00');
-    const [reps, setReps] = useState('00');
-    const [weight, setWeight] = useState('00');
+    const [sets, setSets] = useState('0');
+    const [reps, setReps] = useState('0');
+    const [weight, setWeight] = useState('0');
     const [formUpdated, setFormUpdated] = useState(false);
     const [logLoaded, setLogLoaded] = useState(false);
     const { getLog, log } = useGetLog();
@@ -23,10 +23,12 @@ export default function LogForm ({id}) {
             setWeight(log.weight);
             setLogLoaded(true);
         } else {
-            getLog(id);
+            if(!logLoaded){
+                getLog(id);
+            }
         }
 
-        if((sets !== '00' && sets != log.sets) || (reps !== '00' && reps != log.repetitions) || (weight !== '00' && weight != log.weight)){
+        if((sets !== '0' && sets != log.sets) || (reps !== '0' && reps != log.repetitions) || (weight !== '0' && weight != log.weight)){
             setFormUpdated(true);
         } else {
             setFormUpdated(false);
@@ -35,6 +37,7 @@ export default function LogForm ({id}) {
 
     async function submit(event){
         event.preventDefault();
+        console.log('1');
 
         try{
             const body = {
@@ -43,6 +46,7 @@ export default function LogForm ({id}) {
                 weight: Number(weight)
             }
             await postLog(id, body);
+            getLog(id);
         } catch {
             alert("It was not possible to save data")
         }
@@ -71,16 +75,9 @@ export default function LogForm ({id}) {
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
             />
-
-            {formUpdated ? 
-            <Button type="submit">
+            <Button type="submit" disabled={!formUpdated}>
                 save
             </Button>
-            :
-            <Button>
-                bake
-            </Button>
-            }
         </Form>
     )
 }

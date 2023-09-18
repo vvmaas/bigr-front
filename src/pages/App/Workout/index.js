@@ -5,6 +5,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import useWorkout from "../../../hooks/api/workout/useWorkout";
 import useWorkoutExercises from "../../../hooks/api/workoutExercise/useWorkoutExercises";
 
+import { TiDelete } from "react-icons/ti"
+import { IoMdReturnLeft } from "react-icons/io"
 import LogForm from "./LogForm";
 import Button from "../../../components/Button"
 import PopUp from "../../../components/PopUp/PopUp"
@@ -56,7 +58,7 @@ export default function Workout(){
                                         <p>{workoutExercise.Exercise.name}</p> 
                                         <div>
                                             <LogForm id={workoutExercise.id}/>
-                                            <button onClick={() => setDeleting(true)}>x</button>
+                                            <DeleteButton onClick={() => setDeleting(true)}>x</DeleteButton>
                                         </div>
                                         
                                     </WorkoutExerciseListing>
@@ -97,9 +99,14 @@ const Title = styled.div`
     }
 `
 
-const ReturnButton = styled(Button)`
-    background-color: #1b1d1f40;
-    margin-bottom: 0px;
+const ReturnButton = styled(IoMdReturnLeft)`
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    cursor: pointer;
+
+    :hover {
+        filter: opacity(0.8);
+    }
 `
 
 const WorkoutExerciseList = styled.div`
@@ -119,10 +126,15 @@ const WorkoutExerciseListing = styled.div`
         display: flex;
         align-items: center;
     }
+`
 
-    button {
-        cursor: pointer;
-        margin-top: 10px;
+const DeleteButton = styled(TiDelete)`
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 10px;
+
+    :hover {
+        color: red;
     }
 `
 

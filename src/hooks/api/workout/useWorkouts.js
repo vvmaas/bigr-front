@@ -11,7 +11,7 @@ export default function useWorkouts() {
     loading: workoutsLoading,
     error: workoutsError,
     act: getWorkouts
-  } = useAsync(() => workoutApi.getWorkouts(token));
+  } = useAsync(() => workoutApi.getWorkouts(token), false);
 
   return {
     workouts,

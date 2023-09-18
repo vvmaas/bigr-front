@@ -4,14 +4,15 @@ import { useEffect } from "react";
 import useDeleteWorkout from "../../hooks/api/workout/useDeleteWorkout"
 
 import Button from "../Button"
+import { CancelButton } from "../../pages/App/User/AddWeight";
 
-export default function DeleteWorkout({id, name, setDisplay, deleting, setDeleting}) {
+export default function DeleteWorkout({id, name, setHasUpdate, deleting, setDeleting}) {
     const { deleteWorkoutAct } = useDeleteWorkout();
 
     async function deleteWorkout() {
         await deleteWorkoutAct(id);
 
-        setDisplay('none');
+        setHasUpdate(true);
         setDeleting(false);
     }
 
@@ -20,11 +21,11 @@ export default function DeleteWorkout({id, name, setDisplay, deleting, setDeleti
         <Container>
             <p>Are you sure you want to delete workout <span>{name}</span>?</p>
             <Buttons>
-                <Button onClick={() => setDeleting(false)}>
-                    Cancel
-                </Button>
+                <CancelButton hoverColor="#1b1d1f50" onClick={() => setDeleting(false)}>
+                    cancel
+                </CancelButton>
                 <Button onClick={() => deleteWorkout()}>
-                    Delete
+                    delete
                 </Button>
             </Buttons>
         </Container>

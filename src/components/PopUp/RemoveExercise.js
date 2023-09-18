@@ -3,6 +3,7 @@ import styled from "styled-components"
 import useDeleteWorkoutExercise from "../../hooks/api/workoutExercise/useDeleteWorkoutExercise";
 
 import Button from "../Button"
+import { CancelButton } from "../../pages/App/User/AddWeight";
 
 export default function RemoveExercise({id, exerciseName, workoutName, setHasUpdate, setDeleting}) {
     const { deleteWorkoutExercise } = useDeleteWorkoutExercise()
@@ -20,11 +21,11 @@ export default function RemoveExercise({id, exerciseName, workoutName, setHasUpd
         <Container>
             <p>Are you sure you want to remove <span>{exerciseName}</span> from workout <span>{workoutName}</span>?</p>
             <Buttons>
-                <Button onClick={() => setDeleting(false)}>
-                    Cancel
-                </Button>
+                <CancelButton hoverColor="#1b1d1f50" onClick={() => setDeleting(false)}>
+                    cancel
+                </CancelButton>
                 <Button onClick={() => remove()}>
-                    Remove
+                    remove
                 </Button>
             </Buttons>
         </Container>

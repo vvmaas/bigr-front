@@ -50,11 +50,11 @@ export default function Weight(props) {
                 {weightData[0] ? weightData[weightData.length-1].value + 'kg' : '-'}
             </MainWeight>
             <div>
-                {hasData ? <LineChart chartData={chartData} /> : '-'}
+                {weightData[weightData.length-3] && hasData ? <LineChart chartData={chartData} /> : ''}
             </div>
 
             {editWeight ? 
-                <AddWeight weight={weightData[weightData.length-1].value} weightData={weightData} setWeightData={setWeightData} setEditWeight={setEditWeight}/>
+                <AddWeight weight={weightData[weightData.length-1]?.value} weightData={weightData} setWeightData={setWeightData} setEditWeight={setEditWeight}/>
                 : 
                 <Button onClick={() => setEditWeight(true)}>
                     add weight

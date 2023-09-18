@@ -18,7 +18,7 @@ const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: ${(props) => (props.disabled ? '' : 'pointer')};
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   :hover {
     background-color: ${(props) => (props.disabled ? '#DDDDDD' : props.hoverColor ? props.hoverColor : '#edc900')};
   }

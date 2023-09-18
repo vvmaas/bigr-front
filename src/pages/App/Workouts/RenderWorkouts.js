@@ -11,7 +11,7 @@ import { Buttons, CancelButton } from "../User/AddWeight";
 
 
 export default function RenderWorkouts(props) {
-    const { workouts, setWorkoutsData } = props;
+    const { workouts, setWorkoutsData, setHasUpdate } = props;
     const { postWorkoutAct, postWorkoutLoading } = usePostWorkout();
 
     const [create, setCreate] = useState(false);
@@ -29,6 +29,7 @@ export default function RenderWorkouts(props) {
           setWorkoutsData([newWorkout, ...workouts])
           setName('')
           setCreate(false);
+          setHasUpdate(true);
         } catch (err) {
           alert("It was not possible to create workout")
         }
@@ -66,7 +67,7 @@ export default function RenderWorkouts(props) {
             <WorkoutList>
                 {workouts?.map(workout => {
                     return (
-                            <WorkoutListing key={workout.id} workout={workout}><p>{workout.name}</p></WorkoutListing>
+                            <WorkoutListing key={workout.id} workout={workout} setHasUpdate={props.setHasUpdate}><p>{workout.name}</p></WorkoutListing>
                     )    
                 })}
             </WorkoutList>

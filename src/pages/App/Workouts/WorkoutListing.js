@@ -9,12 +9,11 @@ import { useNavigate } from "react-router-dom";
 
 export default function WorkoutListing({children, ...props}) {
     const [deleting, setDeleting] = useState(false)
-    const [display, setDisplay] = useState('flex')
     const navigate = useNavigate()
 
     return(
         <>
-            <Container display={display} {...props}>
+            <Container {...props}>
                 <Wrapper>
                     <Content onClick={() => navigate(`/app/workouts/${props.workout.id}`)}>
                         {children}
@@ -23,7 +22,7 @@ export default function WorkoutListing({children, ...props}) {
                 </Wrapper>
             </Container>
             <PopUp active={deleting}>
-                <DeleteWorkout id={props.workout.id} name={props.workout.name} setDisplay={setDisplay} deleting={deleting} setDeleting={setDeleting} />
+                <DeleteWorkout id={props.workout.id} name={props.workout.name} setHasUpdate={props.setHasUpdate} deleting={deleting} setDeleting={setDeleting} />
             </PopUp>
         </>
     )

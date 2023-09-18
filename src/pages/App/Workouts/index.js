@@ -5,19 +5,23 @@ import useWorkouts from "../../../hooks/api/workout/useWorkouts";
 import RenderWorkouts from "./RenderWorkouts";
 
 export default function Workouts() {
-    const { workouts } = useWorkouts();
+    const { workouts, getWorkouts } = useWorkouts();
     const [workoutsData, setWorkoutsData] = useState([]);
+    const [hasUpdate, setHasUpdate] = useState(false);
 
     useEffect(() => {
-        if(workouts) {
+        if(workouts && !hasUpdate) {
             setWorkoutsData(workouts)
+        } else {
+            getWorkouts();
+            setHasUpdate(false);
         }
-    }, [workouts])
+    }, [workouts, hasUpdate, getWorkouts])
 
     return (
         <Wrapper>
         { workouts ? (
-            <RenderWorkouts workouts={workouts ? workoutsData : workouts} setWorkoutsData={setWorkoutsData}/>
+            <RenderWorkouts workouts={workouts ? workoutsData : workouts} setHasUpdate={setHasUpdate} setWorkoutsData={setWorkoutsData}/>
         ) : (
             'Loading...'
             )

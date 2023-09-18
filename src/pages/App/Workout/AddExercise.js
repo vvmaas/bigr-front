@@ -7,6 +7,8 @@ import usePostWorkoutExercise from "../../../hooks/api/workoutExercise/usePostWo
 import useExercisesByKeyword from "../../../hooks/api/exercise/useExerciseKeyword";
 import useWorkoutExercises from "../../../hooks/api/workoutExercise/useWorkoutExercises";
 
+import { TiDelete } from "react-icons/ti"
+import { IoMdReturnLeft } from "react-icons/io"
 import Input from "../../../components/Form/Input";
 import Button from "../../../components/Button";
 
@@ -104,7 +106,7 @@ export default function AddExercise(){
                     <ExerciseList>
                         {selected?.map(exercise => {
                             return (
-                                <SelectedExercise key={exercise.id}>{exercise.name}<button onClick={() => unselect(exercise)}>x</button></SelectedExercise>
+                                <SelectedExercise key={exercise.id}>{exercise.name}<DeleteButton onClick={() => unselect(exercise)}>x</DeleteButton></SelectedExercise>
                             )
                         })}
                     </ExerciseList>
@@ -155,9 +157,25 @@ const ExerciseOption = styled.div`
     }
 `
 
-const ReturnButton = styled(Button)`
-    background-color: #1b1d1f40;
-    margin-bottom: 0px;
+const ReturnButton = styled(IoMdReturnLeft)`
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    cursor: pointer;
+
+    :hover {
+        filter: opacity(0.8);
+    }
+`
+
+const DeleteButton = styled(TiDelete)`
+    font-size: 1.05rem;
+    cursor: pointer;
+    margin-top: 2px;
+    margin-left: 10px;
+
+    :hover {
+        color: red;
+    }
 `
 
 const Title = styled.div`
@@ -165,13 +183,15 @@ const Title = styled.div`
 `
 
 const SelectedExercises = styled.div`
-
+    margin-bottom: 15px;
 `
 
 const SelectedExercise = styled.div`
-
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
 `
 
 const ExerciseList = styled.div`
-
+    margin: 15px 0;
 `

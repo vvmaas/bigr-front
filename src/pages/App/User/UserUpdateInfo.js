@@ -22,8 +22,8 @@ export default function UserUpdateInfo(props) {
             name,
             height: Number(height)
           } 
-          setUserData(body)
           await updateUserAct(body);
+          setUserData(body)
           setEdit(false);
         } catch (err) {
           alert("It was not possible to update data")
